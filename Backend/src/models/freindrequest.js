@@ -13,7 +13,7 @@ const freindrequestSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ["pending", accepted],
+        enum: ["pending", "accepted"],
         default:"pending"
     },
    

@@ -1,5 +1,5 @@
-import User from "../models/user"
-import freindrequest from "../models/freindrequest"
+import User from "../models/user.js"
+import freindrequest from "../models/freindrequest.js"
 
 
 
@@ -42,7 +42,7 @@ export async function getmyfreinds(req, res) {
 
 }
 
-export async function freindrequest(req, res) {
+export async function freindrequests(req, res) {
     try {
         const myid = req.user.id;
         const { id: recipientID } = req.params;
