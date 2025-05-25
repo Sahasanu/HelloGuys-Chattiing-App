@@ -20,7 +20,7 @@ const signup = async (req, res) => {
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ message: "Email already exists, please use a different one" });
+      return res.status(400).json({ message: "Email already Taken, Use another" });
     }
 
     const idx = Math.floor(Math.random() * 100) + 1;
