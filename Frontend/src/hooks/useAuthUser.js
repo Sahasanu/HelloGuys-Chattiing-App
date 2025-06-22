@@ -7,7 +7,7 @@ import { useQuery } from '@tanstack/react-query'
     queryFn: getauthuser,
     retry: false,
   })
-    return  {isLoading: authUser.isLoading,authUser:authUser.authData?.user} 
+    return  {isLoading: authUser.isLoading,authUser:authUser.data?.user} 
 }
 
 export default useAuthUser

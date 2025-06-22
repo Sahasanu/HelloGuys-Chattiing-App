@@ -106,15 +106,21 @@ const onboard = async (req, res) => {
   try {
     const userId = req.user?._id;
     const { fullName, bio, location } = req.body;
-    console.log(req.body);
 
+    // ✅ Validate required fields
     if (!fullName || !bio || !location) {
-      return res.status(400).json({ message: "Missing field" });
+      return res.status(400).json({ message: "All fields are required" });
     }
 
+    // ✅ Update user
     const updatedUser = await User.findByIdAndUpdate(
       userId,
-      { fullName, bio, location, isOnBoard: true },
+      {
+        fullName,
+        bio,
+        location,
+        isOnBoard: true,
+      },
       { new: true }
     );
 
@@ -122,23 +128,32 @@ const onboard = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
+    // ✅ Update Stream user
     try {
       await upsertStreamUser({
         id: updatedUser._id.toString(),
         name: updatedUser.fullName,
         image: updatedUser.profilePic || "",
       });
-      console.log("User updated in Stream");
     } catch (streamErr) {
-      return res.status(500).json({ message: "Error updating Stream user" });
+      console.error("Error updating Stream user:", streamErr);
+      // Still succeed onboarding if Stream update fails (optional)
+      return res.status(500).json({ message: "Failed to sync Stream user" });
     }
 
-    return res.status(200).json({ success: true, user: updatedUser });
+    // ✅ Success
+    return res.status(200).json({
+      success: true,
+      message: "Onboarding completed",
+      user: updatedUser,
+    });
+
   } catch (error) {
     console.error("Error in onboarding:", error);
     return res.status(500).json({ message: "Internal server error" });
   }
 };
+
 
 
 
