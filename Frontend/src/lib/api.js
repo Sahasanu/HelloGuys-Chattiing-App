@@ -12,12 +12,16 @@ export const onboardingfn = async (UserData) => {
     
 }
 export const loginfn = async (loginData) => {
-    const response = await axiosInstance.post('/auth/login', loginData5
+    const response = await axiosInstance.post('/auth/login', loginData
         
     );
     return response.data
     
 }
+export const logoutfn = async () => {
+  const response = await axiosInstance.get('/auth/logout');
+  return response.data;
+};
 export const getauthuser= async () => {
       const res = await axiosInstance.get('/auth/me')
       return res.data

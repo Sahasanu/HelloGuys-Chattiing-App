@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from 'react-router-dom'
+ import { Navigate, Route, Routes } from 'react-router-dom'
 import Home from './components/Home'
 import Login from "./components/Login"
 import Signup from "./components/Signup"
@@ -18,13 +18,12 @@ function App() {
   const onboardeduser = Boolean(authUser?.isOnBoard)
 
 
-
   if (isLoading) {
     return <Loading/>; // Add a loading state
   }
 
   return (
-    <div className='wholeapp ' >
+    <div className='wholeapp w-full h-full bg-black text-white ' >
       <Toaster />
       <Routes>
         <Route path='/' element={isauthenticated && onboardeduser ? (<Home />) : (<Navigate to={!isauthenticated ? "/login" : "/onboarding"} />)} replace />

@@ -1,9 +1,15 @@
-import React from 'react'
+import Navbar from "./Navbar"
+import Sidebar from "./Sidebar"
+import Chat from "./Chat"
 
 function Home() {
   return (
-    <div className=''>
-      hello i am home 
+    <div className=' h-[100vh]'>
+      <Navbar />
+      <div className="flex gap-[10px]">
+        <Sidebar />
+        <Chat />
+      </div>
     </div>
   )
 }
