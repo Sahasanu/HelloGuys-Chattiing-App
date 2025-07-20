@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { logoutfn } from '../lib/api'; // update the path as needed
+import { logoutfn } from '../lib/api'; 
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,9 +12,9 @@ const useLogout = () => {
         onSuccess: () => {
              queryClient.setQueryData(['authUser'], null);
 
+             navigate('/login', { replace: true }); // redirect to login
             toast.success('Logged out successfully!');
-            console.log("Logout successful");
-            navigate('/login', { replace: true }); // redirect to login
+            
         },
         onError: (error) => {
             toast.error(error?.response?.data?.message || 'Logout failed', {
