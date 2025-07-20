@@ -12,10 +12,10 @@ const app = express();
 const port = process.env.PORT;
 
 app.use(cors({
-// origin:"http://localhost:5173",
-origin:"https://chatzy-eta.vercel.app",
-credentials:true, //allow frontnd to send cookies
-}))
+  origin: "https://chatzy-eta.vercel.app",
+  credentials: true
+}));
+
 
 // ✅ Middleware first
 app.use(express.json());
