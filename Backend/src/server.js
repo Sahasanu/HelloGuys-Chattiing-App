@@ -15,6 +15,10 @@ app.use(cors({
   origin: "https://chatzy-eta.vercel.app", // your Vercel frontend URL
   credentials: true
 }));
+// app.use(cors({
+//   origin: "http://localhost:5173", 
+//   credentials: true
+// }));
 
 
 // ✅ Middleware first
