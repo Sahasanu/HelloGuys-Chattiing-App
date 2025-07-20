@@ -1,4 +1,4 @@
-import Chatzy from "../assets/Chatzy.png";
+import Chatzy from "../assets/chatzy.png"
 import logoutp from "../assets/logout.png";
 import { Link, useNavigate } from "react-router-dom"; 
 import useAuthUser from '../hooks/useAuthUser.js';

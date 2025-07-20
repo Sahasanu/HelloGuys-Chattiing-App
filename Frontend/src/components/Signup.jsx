@@ -1,5 +1,5 @@
 import useSignup from "../hooks/useSignup.js"
-import logo from "../assets/Chatzy.png"
+import logo from "../assets/chatzy.png"
 import { useState } from 'react'
 import { Link} from 'react-router-dom'
 import Loading from "../loading/Loading.jsx"
