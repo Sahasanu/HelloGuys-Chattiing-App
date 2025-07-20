@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import logo from "../assets/Chatzy.png"
+import logo from "../assets/chatzy.png"
 import Uselogin from '../hooks/useLogin'
 import { Toaster } from 'react-hot-toast'
 import { Link } from 'react-router-dom'
