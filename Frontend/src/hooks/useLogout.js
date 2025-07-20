@@ -9,12 +9,10 @@ const useLogout = () => {
 
     const { mutate: logout, isPending } = useMutation({
         mutationFn: logoutfn,
-        onSuccess: () => {
-             queryClient.setQueryData(['authUser'], null);
-
-             navigate('/login', { replace: true }); // redirect to login
+        onSuccess: async () => {
+            queryClient.setQueryData(['authUser'], null);
+            await navigate('/login', { replace: true }); // redirect to login
             toast.success('Logged out successfully!');
-            
         },
         onError: (error) => {
             toast.error(error?.response?.data?.message || 'Logout failed', {
