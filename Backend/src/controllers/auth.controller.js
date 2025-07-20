@@ -24,7 +24,8 @@ const signup = async (req, res) => {
     }
 
     const idx = Math.floor(Math.random() * 100) + 1;
-    const randomavatar = `https://avatar.iran.liara.run/public/${idx}.png`;
+    const randomavatar = `https://api.dicebear.com/7.x/bottts/svg?seed=${idx}`;
+
 
     const newUser = await User.create({
       email,
@@ -154,8 +155,38 @@ const onboard = async (req, res) => {
   }
 };
 
+ const changePassword = async (req, res) => {
+  const userId = req.user._id;
+  const { oldPassword, newPassword } = req.body;
+
+  if (!oldPassword || !newPassword) {
+    return res.status(400).json({ message: "Please fill all fields." });
+  }
+
+  const user = await User.findById(userId);
+  const isMatch = await bcrypt.compare(oldPassword, user.password);
+
+  if (!isMatch) {
+    return res.status(401).json({ message: "Old password is incorrect." });
+  }
+
+  user.password = newPassword;
+  await user.save();
+
+  res.status(200).json({ message: "Password changed successfully." });
+};
+
+// Delete Account
+ const deleteAccount = async (req, res) => {
+  const userId = req.user._id;
+
+  await User.findByIdAndDelete(userId);
+  res.status(200).json({ message: "Account deleted successfully." });
+};
 
 
 
 
-export { signup, login, logout, onboard };
+
+
+export { signup, login, logout, onboard,changePassword ,deleteAccount};

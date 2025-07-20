@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import useSignup from "../hooks/useSignup.js"
 import logo from "../assets/Chatzy.png"
-import big from "../assets/signup.login.png"
-import { Link, useNavigate } from 'react-router-dom'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { signup } from '../lib/api.js'
+import { useState } from 'react'
+import { Link} from 'react-router-dom'
+import Loading from "../loading/Loading.jsx"
+
 import toast, { Toaster } from 'react-hot-toast'
 
 function Signup() {
@@ -12,25 +12,15 @@ function Signup() {
     email: "",
     password: "",
   })
-
-  const queryClient = useQueryClient()
-  const navigate = useNavigate()
-
-  const { mutate, isPending } = useMutation({
-    mutationFn: () => signup(signupdata),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['authUser'] });
-      toast.success("Account created successfully!")
-      navigate('/', { replace: true });
-    },
-    onError: (error) => {
-      toast.error((error?.response?.data?.message || "Signup failed"), {style:{background:"#000000", color: "white"}})
-    }
-  })
+const { signup, isPending } = useSignup();
+ 
+if(isPending){
+   return <Loading />;
+}
 
   const handleSignup = (e) => {
     e.preventDefault()
-    mutate()
+    signup(signupdata)
   }
 
   return (

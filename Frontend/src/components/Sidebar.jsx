@@ -1,40 +1,72 @@
-
 import useAuthUser from '../hooks/useAuthUser'
 import { useLocation } from 'react-router'
-import { Link } from 'react-router-dom'
 import noti from '../assets/noti.svg'
 import message from '../assets/message.svg'
 import call from '../assets/call.svg'
-import user from "../assets/user.svg"
+import friends from '../assets/freinds.png'
+import Chatlist from './Chatlist'
+import Notification from './Notification'
+import Friends from './Friends'
+import { useState } from 'react'
 
 function Sidebar() {
   const { authUser } = useAuthUser()
   const location = useLocation()
   const currentpath = location.pathname;
-  console.log(currentpath);
+  const [activeTab, setActiveTab] = useState('chat');
+
+  const [unreadMessageCount, setUnreadMessageCount] = useState(0);
+  const [unreadNotificationCount, setUnreadNotificationCount] = useState(0);
+  const [pendingFriendCount, setPendingFriendCount] = useState(0); // ✅ ADD THIS LINE
+
+
+  const getBtnClass = (tab) =>
+    `relative w-[25%] flex justify-center rounded-2xl py-1 items-center ${activeTab === tab ? 'bg-[#4b5757ab] border border-[#505c5c]' : ''
+    }`;
+
+  let activebar;
+  if (activeTab === 'chat') activebar = <Chatlist setUnreadMessageCount={setUnreadMessageCount} />;
+  else if (activeTab === 'call') activebar = <Friends setPendingFriendCount={setPendingFriendCount} />;
+
+  else if (activeTab === 'noti') activebar = <Notification setUnreadNotificationCount={setUnreadNotificationCount} />;
 
   return (
-    <div className='sidebar w-[28%] h-[90vh]'>
-      <div className='btns mt-[5px] bg-gray-800 rounded-[5px] flex justify-around h-[5vh] items-center'>
-        <Link><img src={message} alt="" /></Link>
-        <Link to='/call'><img src={call} alt="" /></Link>
-        <Link to="/notification"><img src={noti} alt="" /></Link>
-      </div>
-      <div className='chats space-y-[20px] h-[84vh]  pt-[2vh] mt-[1vh] bg-gray-800 rounded-[5px] px-[10px]'>
-        <div className="chatcard flex gap-[10px] w-[100%] items-center">
-          <div className='w-[10%] flex items-center '>
-            <img src={user} alt="" className='w-[100%]' />
-          </div>
-          <div className="message-name w-[70%] pl-[20px]">
-            <p className='text-[20px] overflow-hidden'>Test User</p>
-            <p className='overflow-hidden'>hello</p>
-          </div>
-          <div className="notofication-count w-[10%]">
-            <p className="time text-[15px]">12.21pm</p>
-            <p className=' border w-[20px] h-[20px] rounded-full flex items-center justify-center bg-green-400 text-black text-[12px] font-[600] mt-[5px]'>1</p>
-          </div>
+    <div className='sidebar'>
+      <div className='btns mt-[5px] bg-gray-800 rounded-[5px] flex px-5 py-2 justify-between h-[5vh] items-center border-[#3342578c] '>
+
+        {/* Message Icon with Badge */}
+        <div className={getBtnClass('chat')} onClick={() => setActiveTab('chat')}>
+          <img src={message} alt="" />
+          {unreadMessageCount > 0 && (
+            <span className="absolute top-0 right-0 -translate-x-[20px] -translate-y-[15%] bg-green-400 text-black text-xs font-bold w-[18px] h-[18px] rounded-full flex items-center justify-center">
+              {unreadMessageCount}
+            </span>
+          )}
         </div>
-       
+
+        {/* Friends Icon with Badge */}
+        <div className={getBtnClass('call')} onClick={() => setActiveTab('call')}>
+          <img src={friends} className='w-[25px]' alt="" />
+          {pendingFriendCount > 0 && (
+            <span className="absolute top-0 right-0 -translate-x-[20px] -translate-y-[15%] bg-green-400 text-black text-xs font-bold w-[18px] h-[18px] rounded-full flex items-center justify-center">
+              {pendingFriendCount}
+            </span>
+          )}
+        </div>
+
+        {/* Notification Icon with Badge */}
+        <div className={getBtnClass('noti')} onClick={() => setActiveTab('noti')}>
+          <img src={noti} alt="" />
+          {unreadNotificationCount > 0 && (
+            <span className="absolute top-0 right-0 -translate-x-[20px] -translate-y-[15%] bg-green-400 text-black text-xs font-bold w-[18px] h-[18px] rounded-full flex items-center justify-center">
+              {unreadNotificationCount}
+            </span>
+          )}
+        </div>
+      </div>
+
+      <div className="sidebar-content">
+        {activebar}
       </div>
     </div>
   )

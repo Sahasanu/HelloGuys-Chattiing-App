@@ -24,17 +24,20 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    friends: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
-    },
+    friends: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+            default: [],
+        },
+    ],
     location: {
         type: String,
-        
+
     },
     bio: {
         type: String,
-        
+
     }
 },
     { timestamps: true }
@@ -52,9 +55,9 @@ userSchema.pre("save", async function (next) {
     }
 });
 
-userSchema.methods.matchPassword= async function (enterdpassword) {
-   const isPasswordCorrect = await bcrypt.compare(enterdpassword, this.password) 
- return isPasswordCorrect;
+userSchema.methods.matchPassword = async function (enterdpassword) {
+    const isPasswordCorrect = await bcrypt.compare(enterdpassword, this.password)
+    return isPasswordCorrect;
 }
 
 

@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router();
-import { signup, login, logout ,onboard } from '../controllers/auth.controller.js';
+import { signup, login, logout ,onboard,changePassword,deleteAccount } from '../controllers/auth.controller.js';
 import { protectroute } from "../middleware/middleware.js";
 
 
@@ -12,6 +12,8 @@ router.get("/me", protectroute, (req, res) => {
   res.status(200).json({success:true, user: req.user})
 }
 )
+router.put("/change-password",protectroute, changePassword);
+router.delete("/delete-account",protectroute, deleteAccount);
 
 
 export default router;

@@ -19,15 +19,11 @@ export const upsertStreamUser = async (userData) => {
     }
 };
 
-export const generateStreamToken = (userId)=>{
-try {
-    // ensure the userId is a string
-    const userIdstr= userId.toString()
-    return stramClient.CrreateToken(userIdstr)
-
-
-} catch (error) {
-    console.log('Error in generating token', error);
-    
-}
-}
+export const generateStreamToken = (userId) => {
+  try {
+    const userIdStr = userId.toString();
+    return chatClient.createToken(userIdStr);
+  } catch (error) {
+    console.error('Error in generating token', error);
+  }
+};

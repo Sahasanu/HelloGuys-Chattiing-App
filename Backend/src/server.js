@@ -22,7 +22,7 @@ app.use(cookieParser()); // Optional but useful for authentication
 
 // ✅ Then routes
 app.use("/auth", authrouter);
-app.use("/users", userroutes);
+app.use("/user", userroutes);
 app.use("/chat", chatroutes);
 
 app.listen(port, () => {

@@ -1,17 +1,16 @@
-import Navbar from "./Navbar"
-import Sidebar from "./Sidebar"
-import Chat from "./Chat"
+
+import home from '../assets/home.png'
 
 function Home() {
+
   return (
-    <div className=' h-[100vh]'>
-      <Navbar />
-      <div className="flex gap-[10px]">
-        <Sidebar />
-        <Chat />
+    <div className='w-[100%] h-[89vh] rounded-[10px] flex items-center justify-center bg-gray-800 '>
+      <div className=''>
+        <img className='w-[400px]'  src={home} alt="" />
+        <p className='text-center text-[25px] text-gray-400'>Start a Chat </p>
       </div>
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;

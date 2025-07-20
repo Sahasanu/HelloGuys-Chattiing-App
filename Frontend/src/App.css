@@ -1,1 +1,100 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+/* ---------- Scrollbar Styling ---------- */
+.message-list::-webkit-scrollbar {
+  width: 6px;
+}
+.message-list::-webkit-scrollbar-track {
+  background: #1f2937; /* Tailwind bg-gray-800 */
+  border-radius: 10px;
+}
+.message-list::-webkit-scrollbar-thumb {
+  background-color: #4b5563; /* Tailwind bg-gray-600 */
+  border-radius: 10px;
+}
+.message-list::-webkit-scrollbar-thumb:hover {
+  background-color: #6b7280; /* hover */
+}
+
+.str-chat__list {
+  scrollbar-width: thin;
+  scrollbar-color: #4b5563 #1f2937;
+}
+.str-chat__list::-webkit-scrollbar {
+  width: 6px;
+}
+.str-chat__list::-webkit-scrollbar-thumb {
+  background: #4b5563;
+  border-radius: 8px;
+}
+
+/* ---------- Custom Chat Theme ---------- */
+.custom-chat-theme .str-chat {
+  --str-chat__background-color: #1E2939;
+  --str-chat__primary-surface-color: #0378516f;
+  --str-chat__secondary-surface-color: #030505;
+  --str-chat__text-color: #ffffff;
+  --str-chat__border-radius-md: 15px;
+  --str-chat__avatar-background-color: #0a3d31;
+}
+
+/* ---------- Channel Header ---------- */
+.custom-chat-theme .str-chat__channel-header {
+  background-color: #282c32 !important;
+  color: #ffffff !important;
+  border-radius: 10px;
+  border: none !important;
+  box-shadow: none !important;
+  padding-left: 1rem;
+}
+
+/* ---------- Message Input ---------- */
+.custom-chat-theme .str-chat__message-input {
+  background-color: #243447 !important;
+  border-radius: 10px;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Inner textarea */
+.custom-chat-theme .str-chat__message-textarea {
+  background-color: #243447 !important;
+  color: white !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Placeholder color */
+.custom-chat-theme .str-chat__message-textarea::placeholder {
+  color: #a1a1aa !important; /* Tailwind slate-300 */
+}
+
+/* ---------- Input Buttons ---------- */
+.custom-chat-theme .str-chat__message-input-button {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+/* File input (optional debug style) */
+.str-chat__file-input svg {
+  border: 2px solid transparent;
+}
+
+/* ---------- Reactions, Threads, Replies ---------- */
+.custom-chat-theme .str-chat__reaction-selector {
+  background-color: #032924 !important;
+  border: 1px solid #0f766e;
+}
+
+.custom-chat-theme .str-chat__thread-header,
+.custom-chat-theme .str-chat__message-reply {
+  background-color: #043933 !important;
+  color: white;
+}
+
+/* ---------- Misc Cleanup ---------- */
+.str-chat__message-input--emojis {
+  background-color: transparent !important;
+  border: none !important;
+}
