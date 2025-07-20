@@ -12,7 +12,7 @@ const app = express();
 const port = process.env.PORT;
 
 app.use(cors({
-  origin: "https://chatzy-eta.vercel.app",
+  origin: "https://chatzy-eta.vercel.app", // your Vercel frontend URL
   credentials: true
 }));
 

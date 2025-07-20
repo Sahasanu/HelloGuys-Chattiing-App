@@ -84,10 +84,10 @@ const login = async (req, res) => {
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
 
     res.cookie("jwt", token, {
-      maxAge: 7 * 24 * 60 * 60 * 1000,
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       httpOnly: true,
-      sameSite: "strict",
-      secure: process.env.NODE_ENV === "production"
+      sameSite: "None",               // ✅ Required for cross-origin cookies
+      secure: true                    // ✅ Required on HTTPS (production)
     });
 
     res.status(200).json({ success: true, user });
@@ -155,7 +155,7 @@ const onboard = async (req, res) => {
   }
 };
 
- const changePassword = async (req, res) => {
+const changePassword = async (req, res) => {
   const userId = req.user._id;
   const { oldPassword, newPassword } = req.body;
 
@@ -177,7 +177,7 @@ const onboard = async (req, res) => {
 };
 
 // Delete Account
- const deleteAccount = async (req, res) => {
+const deleteAccount = async (req, res) => {
   const userId = req.user._id;
 
   await User.findByIdAndDelete(userId);
@@ -189,4 +189,4 @@ const onboard = async (req, res) => {
 
 
 
-export { signup, login, logout, onboard,changePassword ,deleteAccount};
+export { signup, login, logout, onboard, changePassword, deleteAccount };
